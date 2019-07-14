@@ -33,6 +33,7 @@ typedef	struct		s_data
 	int				num_possbl_sol;
 	int				oppnt_x;
 	int				oppnt_y;
+	char			*dir;
 }					t_data;
 
 t_data				*init_data(void);

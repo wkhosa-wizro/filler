@@ -53,6 +53,10 @@ void	add_valid_sol(int *col_row, t_data *data)
 int		find_sol(t_data *data)
 {
 	int			*col_row;
+	float		len_1, len_2;
+	int			weight;
+
+	weight = 1;
 
 	if (!(col_row = (int *)malloc(sizeof(int) * 3)))
 		return (-1);
@@ -64,6 +68,33 @@ int		find_sol(t_data *data)
 		col_row[1] = 1 - data->piece->row;
 		while (col_row[1] < data->map->row)
 		{
+			len_1 = col_row[0] - ((data->piece->col) / 2.0);
+			len_2 = col_row[1] - ((data->piece->row) / 2.0);
+			if ((len_1 >= 0 && len_2 >=0) &&
+											(ft_strcmp(data->dir, "NE") == 0)){
+				weight = weight * 4;
+
+				ft_strcpy( data->dir, "NW");
+			} else if ((len_1 >= 0 && len_2 < 0) &&
+											(ft_strcmp(data->dir, "NW") == 0)){
+				weight = weight * 4;
+
+				ft_strcpy( data->dir, "SW");
+			} else if ((len_1 < 0 && len_2 < 0) &&
+											(ft_strcmp(data->dir, "SW") == 0)){
+				weight = weight * 4;
+
+				ft_strcpy( data->dir, "SE");
+			} else if ((len_1 < 0 && len_2 >= 0) &&
+											(ft_strcmp(data->dir, "SE") == 0)){
+				weight = weight * 4;
+
+				ft_strcpy( data->dir, "NE");
+			} else {
+				weight = 1;
+
+			}
+			col_row[2] = (len_1 * len_1 + len_2 * len_2) * weight;
 			add_valid_sol(col_row, data);
 			col_row[1] += 1;
 		}

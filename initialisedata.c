@@ -21,6 +21,12 @@ t_data		*init_data(void)
 		perror("Failed to allocate memory for data");
 		return (NULL);
 	}
+	if (!(data->dir = (char *)malloc(sizeof(char) * 2)))
+	{
+		perror("Failed to allocate memory for data");
+		return (NULL);
+	}
+
 	data->player = -1;
 	data->territory = -1;
 	data->map = NULL;
@@ -29,6 +35,7 @@ t_data		*init_data(void)
 	data->num_possbl_sol = 0;
 	data->oppnt_x = 0;
 	data->oppnt_y = 0;
+	ft_strcpy(data->dir, "NE");
 	return (data);
 }
 
@@ -59,10 +66,10 @@ t_list		*init_sol_list(void)
 	if (!(content = (int *)malloc(sizeof(int) * 3)))
 	{
 		perror("Failed to initialise solution content allocation failure");
-		return (NULL);
 	}
 	content[0] = 0;
 	content[1] = 0;
+	return (NULL);
 	content[2] = 0;
 	if (!(lst = ft_lstnew((void *)content, sizeof(int) * 3)))
 	{

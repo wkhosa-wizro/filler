@@ -16,7 +16,6 @@ void	print_sol(t_list *sol, int weight)
 {
 	int		fd;
 	t_list	*current;
-
 	fd = 1;
 	if (sol == NULL)
 	{
@@ -24,8 +23,14 @@ void	print_sol(t_list *sol, int weight)
 		return ;
 	}
 	current = sol;
-	while ((current->next) && ((int *)current->content)[2] != weight)
+
+	while ((current->next) && ((int *)current->content)[2] != weight) {
+		fprintf(stderr,"\nSol %d , %d : %d", ((int *)current->content)[1],
+												((int *)current->content)[0],
+											((int *)current->content)[2]);
 		current = current->next;
+	}
+
 	ft_putnbr_fd(((int *)current->content)[1], fd);
 	ft_putchar_fd(' ', fd);
 	ft_putnbr_fd(((int *)current->content)[0], fd);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "include/filler.h"
+#include <stdio.h>
 
 int		main(void)
 {
@@ -33,8 +34,9 @@ int		main(void)
 			ft_putstr_fd("8 2\n", 1);
 			break ;
 		}
-		else
+		else {
 			print_sol(data->sol_lst, weight);
+		}
 	}
 	free_data(data);
 	return (1);
